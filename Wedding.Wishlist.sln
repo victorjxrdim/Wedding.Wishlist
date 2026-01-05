@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.1.11312.151
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Src", "1 - Src", "{7E601717-3789-4680-BE13-B290203D0211}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Domain", "1 - Domain", "{372B4073-76BE-4A6E-8B95-DE98FD292387}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Application", "2 - Application", "{C1C29466-8FCB-40E5-AAAF-9D4F775BF536}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Infra", "3 - Infra", "{051FFB90-7EFC-43FB-B533-A2C2473340CC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Services", "4 - Services", "{CD4D99BE-9BDA-4E9B-AC51-300E82383561}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Presentation", "5 - Presentation", "{BFD99A1B-2087-406D-8C0E-B80B1557A366}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wedding.Wishlist.Domain", "Src\Domain\Wedding.Wishlist.Domain\Wedding.Wishlist.Domain.csproj", "{21CA9E1D-5DEA-146C-694F-ABB0E6B43EFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wedding.Wishlist.Application", "Src\Application\Wedding.Wishlist.Application\Wedding.Wishlist.Application.csproj", "{14552347-0B94-69E2-EB8A-5D3EC263F75A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wedding.Wishlist.DataAccess", "Src\Infra\Wedding.Wishlist.DataAccess\Wedding.Wishlist.DataAccess.csproj", "{C5F7C2E1-C545-D855-68D4-4A75C654DE0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wedding.Wishlist.WebApi", "Src\Services\Wedding.Wishlist.WebApi\Wedding.Wishlist.WebApi.csproj", "{6C6A58C5-2223-19CC-09A5-B5681C761D2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wedding.Wishlist.WebApp", "Src\Presentation\Wedding.Wishlist.WebApp\Wedding.Wishlist.WebApp.csproj", "{8AF544DB-3A86-227E-E0B3-B4164FC194CD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Solution Items", "2 - Solution Items", "{B9D6396A-722A-49B2-B43E-3C83ED41368F}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Repository Files", "3 - Repository Files", "{8532B053-8557-4E09-9A54-949261D167C5}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{21CA9E1D-5DEA-146C-694F-ABB0E6B43EFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21CA9E1D-5DEA-146C-694F-ABB0E6B43EFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21CA9E1D-5DEA-146C-694F-ABB0E6B43EFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21CA9E1D-5DEA-146C-694F-ABB0E6B43EFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14552347-0B94-69E2-EB8A-5D3EC263F75A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14552347-0B94-69E2-EB8A-5D3EC263F75A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14552347-0B94-69E2-EB8A-5D3EC263F75A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14552347-0B94-69E2-EB8A-5D3EC263F75A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5F7C2E1-C545-D855-68D4-4A75C654DE0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5F7C2E1-C545-D855-68D4-4A75C654DE0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5F7C2E1-C545-D855-68D4-4A75C654DE0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5F7C2E1-C545-D855-68D4-4A75C654DE0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C6A58C5-2223-19CC-09A5-B5681C761D2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C6A58C5-2223-19CC-09A5-B5681C761D2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C6A58C5-2223-19CC-09A5-B5681C761D2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C6A58C5-2223-19CC-09A5-B5681C761D2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AF544DB-3A86-227E-E0B3-B4164FC194CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AF544DB-3A86-227E-E0B3-B4164FC194CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AF544DB-3A86-227E-E0B3-B4164FC194CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AF544DB-3A86-227E-E0B3-B4164FC194CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{372B4073-76BE-4A6E-8B95-DE98FD292387} = {7E601717-3789-4680-BE13-B290203D0211}
+		{C1C29466-8FCB-40E5-AAAF-9D4F775BF536} = {7E601717-3789-4680-BE13-B290203D0211}
+		{051FFB90-7EFC-43FB-B533-A2C2473340CC} = {7E601717-3789-4680-BE13-B290203D0211}
+		{CD4D99BE-9BDA-4E9B-AC51-300E82383561} = {7E601717-3789-4680-BE13-B290203D0211}
+		{BFD99A1B-2087-406D-8C0E-B80B1557A366} = {7E601717-3789-4680-BE13-B290203D0211}
+		{21CA9E1D-5DEA-146C-694F-ABB0E6B43EFB} = {372B4073-76BE-4A6E-8B95-DE98FD292387}
+		{14552347-0B94-69E2-EB8A-5D3EC263F75A} = {C1C29466-8FCB-40E5-AAAF-9D4F775BF536}
+		{C5F7C2E1-C545-D855-68D4-4A75C654DE0B} = {051FFB90-7EFC-43FB-B533-A2C2473340CC}
+		{6C6A58C5-2223-19CC-09A5-B5681C761D2C} = {CD4D99BE-9BDA-4E9B-AC51-300E82383561}
+		{8AF544DB-3A86-227E-E0B3-B4164FC194CD} = {BFD99A1B-2087-406D-8C0E-B80B1557A366}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {32671255-8DC7-4994-A95F-A1BB5F5D49C9}
+	EndGlobalSection
+EndGlobal
