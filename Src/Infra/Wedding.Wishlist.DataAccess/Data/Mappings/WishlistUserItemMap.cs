@@ -4,9 +4,9 @@ using Wedding.Wishlist.Domain.Entities;
 
 namespace Wedding.Wishlist.DataAccess.Data.Mappings
 {
-    internal class WishlistsItemMap : IEntityTypeConfiguration<WishlistsItem>
+    internal class WishlistUserItemMap : IEntityTypeConfiguration<WishlistUserItem>
     {
-        public void Configure(EntityTypeBuilder<WishlistsItem> builder)
+        public void Configure(EntityTypeBuilder<WishlistUserItem> builder)
         {
             builder.ToTable("WISHLIST_USER_ITEM");
             builder.HasKey(x => x.Id);

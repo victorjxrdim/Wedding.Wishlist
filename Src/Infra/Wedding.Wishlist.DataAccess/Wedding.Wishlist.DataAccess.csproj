@@ -15,5 +15,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Domain\Wedding.Wishlist.Domain\Wedding.Wishlist.Domain.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
 	
 </Project>

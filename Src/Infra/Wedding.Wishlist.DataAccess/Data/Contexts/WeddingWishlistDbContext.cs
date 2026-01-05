@@ -10,13 +10,13 @@ namespace Wedding.Wishlist.DataAccess.Data.Contexts
     {
         public DbSet<Users> Users { get; set; }
         public DbSet<Wishlists> Wishlists { get; set; }
-        public DbSet<WishlistsItem> WishlistItems { get; set; }
+        public DbSet<WishlistUserItem> WishlistUserItem { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UsersMap());
             modelBuilder.ApplyConfiguration(new WishlistsMap());
-            modelBuilder.ApplyConfiguration(new WishlistsItemMap());
+            modelBuilder.ApplyConfiguration(new WishlistUserItemMap());
 
             base.OnModelCreating(modelBuilder);
         }

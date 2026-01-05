@@ -15,7 +15,7 @@ namespace Wedding.Wishlist.DataAccess.Extensions
                 options.UseOracle(
                     configuration.GetConnectionString("OracleConnection")
                 )
-            );          
+            );
 
             #endregion
 
