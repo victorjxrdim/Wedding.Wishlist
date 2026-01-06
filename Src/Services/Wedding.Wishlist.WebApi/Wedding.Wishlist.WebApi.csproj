@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-	
+
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.11" />
@@ -15,10 +15,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Application\Wedding.Wishlist.Application\Wedding.Wishlist.Application.csproj" />
     <ProjectReference Include="..\..\Infra\Wedding.Wishlist.DataAccess\Wedding.Wishlist.DataAccess.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="V1\Controllers\" />
   </ItemGroup>
 
 </Project>

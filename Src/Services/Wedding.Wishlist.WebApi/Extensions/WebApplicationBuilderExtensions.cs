@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Core.Application.Extensions;
+using Core.Application.RequestHandlers;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Wedding.Wishlist.DataAccess.Data.Contexts;
 using Wedding.Wishlist.DataAccess.Extensions;
@@ -7,7 +9,7 @@ namespace Wedding.Wishlist.WebApi.Extensions
 {
     public static class WebApplicationBuilderExtensions
     {
-        public static WebApplicationBuilder ConfigureWebApi(this WebApplicationBuilder builder)
+        internal static WebApplicationBuilder ConfigureWebApi(this WebApplicationBuilder builder)
         {
             #region Default Configuration
             
@@ -16,12 +18,15 @@ namespace Wedding.Wishlist.WebApi.Extensions
             {
                 g.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Wedding Wishlist API",
+                    Title = "Wedding.Wishlist.WebApi",
                     Version = "v1"
                 });
             });
 
             builder.Services.ConfigureDataAccess(builder.Configuration);
+            builder.Services.AddCoreMediatR(
+                typeof(BaseRequestHandler<,>).Assembly
+                );
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("cors-default-policy", policy =>
@@ -38,26 +43,26 @@ namespace Wedding.Wishlist.WebApi.Extensions
             return builder;
         }
 
-        public static void AddBaseWebApp(this WebApplication webApp)
+        internal static void AddBaseWebApp(this WebApplication webApp)
         {
             if (webApp.Environment.IsDevelopment())
             {
                 webApp.UseSwagger();
                 webApp.UseSwaggerUI(swg =>
                 {
-                    swg.SwaggerEndpoint("/swagger/v1/swagger.json", "Wedding.Wishlist.WebApi v1");
+                    swg.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
                     swg.RoutePrefix = string.Empty;
                 });
             }
             
             webApp.UseHttpsRedirection();
-            webApp.UseAuthentication();
-            webApp.UseAuthorization();
             webApp.UseCors("cors-default-policy");
+            webApp.UseAuthentication();            
+            webApp.UseAuthorization();            
             webApp.MapControllers();
         }
 
-        public static void RunMigration(this WebApplication webApp)
+        internal static void RunMigration(this WebApplication webApp)
         {
             using (var scope = webApp.Services.CreateScope())
             {

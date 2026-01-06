@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Domain\Wedding.Wishlist.Domain\Wedding.Wishlist.Domain.csproj" />
+    <ProjectReference Include="..\..\Packages\Core.Application\Core.Application.csproj" />
   </ItemGroup>
 
 </Project>

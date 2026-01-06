@@ -1,12 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using Core.Infra.DataAccess.Data.Contexts;
+using Microsoft.EntityFrameworkCore;
 using Wedding.Wishlist.DataAccess.Data.Mappings;
 using Wedding.Wishlist.Domain.Entities;
 
 namespace Wedding.Wishlist.DataAccess.Data.Contexts
 {
     public class WeddingWishlistDbContext(DbContextOptions options)
-        : DbContext(options)
+        : DbContext(options), IAppDbContext
     {
         public DbSet<Users> Users { get; set; }
         public DbSet<Wishlists> Wishlists { get; set; }

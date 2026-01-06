@@ -7,13 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.11" />
-    <PackageReference Include="Oracle.EntityFrameworkCore" Version="8.23.90" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Domain\Wedding.Wishlist.Domain\Wedding.Wishlist.Domain.csproj" />
+    <ProjectReference Include="..\..\Packages\Core.Infra\Core.Infra.Data\Core.Infra.DataAccess.csproj" />
   </ItemGroup>
 
   <ItemGroup>

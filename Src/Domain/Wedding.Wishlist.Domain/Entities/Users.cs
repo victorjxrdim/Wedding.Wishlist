@@ -1,8 +1,10 @@
-﻿namespace Wedding.Wishlist.Domain.Entities
+﻿using Core.Domain.Entities;
+
+namespace Wedding.Wishlist.Domain.Entities
 {
     public class Users
-    {
-        public Guid Id { get; set; } = Guid.NewGuid();
+        : Entity<Guid>
+    {        
         public string Name { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string EncryptedPassword { get; set; } = string.Empty;

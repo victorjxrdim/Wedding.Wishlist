@@ -1,8 +1,10 @@
-﻿namespace Wedding.Wishlist.Domain.Entities
+﻿using Core.Domain.Entities;
+
+namespace Wedding.Wishlist.Domain.Entities
 {
     public class WishlistUserItem
-    {
-        public Guid Id { get; set; } = Guid.NewGuid();
+        : Entity<Guid>
+    {        
         public Guid UserId { get; set; }
         public Guid WishlistsId { get; set; }        
         public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
