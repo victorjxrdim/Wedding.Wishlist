@@ -17,7 +17,7 @@ namespace Wedding.Wishlist.DataAccess.Migrations
                     ID = table.Column<Guid>(nullable: false),
                     NAME = table.Column<string>(maxLength: 256, nullable: false),
                     EMAIL = table.Column<string>(maxLength: 256, nullable: false),
-                    ENCRYPTED_PASSWORD = table.Column<string>(maxLength: 256, nullable: false),
+                    HASH_PASSWORD = table.Column<string>(maxLength: 256, nullable: false),
                     HASH_VERSION = table.Column<string>(maxLength: 10, nullable: false),
                     CREATED_AT = table.Column<DateTimeOffset>(nullable: false)
                 },

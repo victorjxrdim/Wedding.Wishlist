@@ -1,7 +1,8 @@
 ﻿using Core.Application.Extensions;
-using Core.Application.RequestHandlers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Wedding.Wishlist.Application.Extensions;
+using Wedding.Wishlist.Application.Requests;
 using Wedding.Wishlist.DataAccess.Data.Contexts;
 using Wedding.Wishlist.DataAccess.Extensions;
 
@@ -12,7 +13,8 @@ namespace Wedding.Wishlist.WebApi.Extensions
         internal static WebApplicationBuilder ConfigureWebApi(this WebApplicationBuilder builder)
         {
             #region Default Configuration
-            
+
+            builder.Services.AddHttpContextAccessor();
             builder.Services.AddControllers();
             builder.Services.AddSwaggerGen(g =>
             {
@@ -23,10 +25,8 @@ namespace Wedding.Wishlist.WebApi.Extensions
                 });
             });
 
-            builder.Services.ConfigureDataAccess(builder.Configuration);
-            builder.Services.AddCoreMediatR(
-                typeof(BaseRequestHandler<,>).Assembly
-                );
+            builder.Services.AddCoreMediatR(typeof(CreateWishlistItemCommand).Assembly);
+
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("cors-default-policy", policy =>
@@ -40,6 +40,9 @@ namespace Wedding.Wishlist.WebApi.Extensions
 
             #endregion
 
+            builder.Services.ConfigureApplication();
+            builder.Services.ConfigureDataAccess(builder.Configuration);
+
             return builder;
         }
 
@@ -51,14 +54,14 @@ namespace Wedding.Wishlist.WebApi.Extensions
                 webApp.UseSwaggerUI(swg =>
                 {
                     swg.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-                    swg.RoutePrefix = string.Empty;
+                    swg.RoutePrefix = "swagger";
                 });
             }
-            
+
             webApp.UseHttpsRedirection();
             webApp.UseCors("cors-default-policy");
-            webApp.UseAuthentication();            
-            webApp.UseAuthorization();            
+            webApp.UseAuthentication();
+            webApp.UseAuthorization();
             webApp.MapControllers();
         }
 
@@ -78,6 +81,18 @@ namespace Wedding.Wishlist.WebApi.Extensions
                     throw;
                 }
             }
+        }
+
+        internal static void ConfigureLogging(this WebApplicationBuilder builder)
+        {
+            builder.Logging.ClearProviders();
+            builder.Logging.AddSimpleConsole(options =>
+            {
+                options.IncludeScopes = true;
+                options.SingleLine = true;
+                options.TimestampFormat = "hh:mm:ss ";
+            });
+            builder.Logging.SetMinimumLevel(LogLevel.Information);
         }
     }
 }

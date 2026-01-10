@@ -12,8 +12,8 @@ using Wedding.Wishlist.DataAccess.Data.Contexts;
 namespace Wedding.Wishlist.DataAccess.Migrations
 {
     [DbContext(typeof(WeddingWishlistDbContext))]
-    [Migration("20260105182802_WishlistUserItem")]
-    partial class WishlistUserItem
+    [Migration("20260109040944_Logs")]
+    partial class Logs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

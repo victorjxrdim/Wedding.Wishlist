@@ -1,8 +1,9 @@
 using Wedding.Wishlist.WebApi.Extensions;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args)
+    .ConfigureWebApi();
 
-builder.ConfigureWebApi();
+builder.ConfigureLogging();
 
 var app = builder.Build();
 

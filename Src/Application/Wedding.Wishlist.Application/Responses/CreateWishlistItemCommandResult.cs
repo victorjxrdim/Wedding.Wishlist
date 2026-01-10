@@ -1,6 +1,6 @@
 ﻿namespace Wedding.Wishlist.Application.Responses
 {
-    internal class CreateWishlistItemResult
+    public class CreateWishlistItemCommandResult
     {
     }
 }

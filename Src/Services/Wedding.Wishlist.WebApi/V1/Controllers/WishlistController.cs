@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Wedding.Wishlist.Application.Requests;
 using Wedding.Wishlist.WebApi.V1.Contracts.Requests;
 
 namespace Wedding.Wishlist.WebApi.V1.Controllers
@@ -19,8 +19,20 @@ namespace Wedding.Wishlist.WebApi.V1.Controllers
         public async Task<IActionResult> CreateWishlistItem(CreateWishlistItemRequest request)
         {
             var command = request.ToCommand();
+
             var response = await _mediator.Send(command);
-            return Ok(command);
+
+            return Ok(response);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetWishlists()
+        {
+            var query = new GetWishlistQuery();
+
+            var response = await _mediator.Send(query);
+
+            return Ok(response);
         }
     }
 }

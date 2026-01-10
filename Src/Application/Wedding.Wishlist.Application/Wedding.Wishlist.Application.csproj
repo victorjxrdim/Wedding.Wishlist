@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Domain\Wedding.Wishlist.Domain\Wedding.Wishlist.Domain.csproj" />
     <ProjectReference Include="..\..\Packages\Core.Application\Core.Application.csproj" />
+    <ProjectReference Include="..\..\Packages\Core.Utils\Core.Utils\Core.Utils.csproj" />    
   </ItemGroup>
 
 </Project>

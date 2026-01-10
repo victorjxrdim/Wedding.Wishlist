@@ -1,11 +1,10 @@
-﻿using Core.Domain.Entities;
-using Wedding.Wishlist.Domain.Enums;
+﻿using Wedding.Wishlist.Domain.Enums;
 
 namespace Wedding.Wishlist.Domain.Entities
 {
-    public class Wishlists
-        : EntityByGuid<Guid>
-    {        
+    public class WishlistsDto       
+    {
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public Category Category { get; set; } = Category.Unknown;
