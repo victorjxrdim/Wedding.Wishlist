@@ -45,6 +45,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Infra.DataAccess", "Sr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Utils", "Src\Packages\Core.Utils\Core.Utils\Core.Utils.csproj", "{403B2D8A-14BD-4CCA-9441-34D2C92EE73E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.WebApi", "Src\Packages\Core.WebApi\Core.WebApi\Core.WebApi.csproj", "{82297CEA-F368-B98E-19AC-58CFE91F0A5E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{403B2D8A-14BD-4CCA-9441-34D2C92EE73E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{403B2D8A-14BD-4CCA-9441-34D2C92EE73E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{403B2D8A-14BD-4CCA-9441-34D2C92EE73E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82297CEA-F368-B98E-19AC-58CFE91F0A5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82297CEA-F368-B98E-19AC-58CFE91F0A5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82297CEA-F368-B98E-19AC-58CFE91F0A5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82297CEA-F368-B98E-19AC-58CFE91F0A5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,6 +113,7 @@ Global
 		{0752DB5A-23CD-4A86-A966-0594AF08FCF3} = {B6330280-9FFA-4F9C-878E-05E284F56BBF}
 		{A155EA2F-7AD3-49FE-9BC1-AE25A603DDB7} = {B6330280-9FFA-4F9C-878E-05E284F56BBF}
 		{403B2D8A-14BD-4CCA-9441-34D2C92EE73E} = {B6330280-9FFA-4F9C-878E-05E284F56BBF}
+		{82297CEA-F368-B98E-19AC-58CFE91F0A5E} = {B6330280-9FFA-4F9C-878E-05E284F56BBF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {32671255-8DC7-4994-A95F-A1BB5F5D49C9}
