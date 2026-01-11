@@ -1,9 +1,11 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Wedding.Wishlist.WebApi.V1.Contracts.Requests;
 
 namespace Wedding.Wishlist.WebApi.V1.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController(

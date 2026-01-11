@@ -1,4 +1,6 @@
 ﻿using Core.Application.Extensions;
+using Core.Application.Interfaces;
+using Core.WebApi.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Wedding.Wishlist.Application.Extensions;
@@ -23,7 +25,33 @@ namespace Wedding.Wishlist.WebApi.Extensions
                     Title = "Wedding.Wishlist.WebApi",
                     Version = "v1"
                 });
+
+                g.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "Informe o token JWT no formato: Bearer {token}"
+                });
+
+                g.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
             });
+
 
             builder.Services.AddCoreMediatR(typeof(CreateWishlistItemCommand).Assembly);
 
@@ -42,6 +70,14 @@ namespace Wedding.Wishlist.WebApi.Extensions
 
             builder.Services.ConfigureApplication();
             builder.Services.ConfigureDataAccess(builder.Configuration);
+
+            var jwtOptions = builder.Configuration.GetSection(JwtOptions.SectionName).Get<JwtOptions>();
+
+            builder.Services.AddJwtAuthentication(jwtOptions!);
+
+            builder.Services.AddScoped<ITokenGenerator>(
+                _ => new TokenGenerator(jwtOptions!)
+            );
 
             return builder;
         }

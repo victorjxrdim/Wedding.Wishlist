@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using Core.Application.RequestHandlers;
 using Core.Domain.Interfaces;
-using Core.Security.Security;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Wedding.Wishlist.Application.Requests;
 using Wedding.Wishlist.Application.Responses;
-using Wedding.Wishlist.Domain.Entities;
 using Wedding.Wishlist.Domain.Enums;
 using Wedding.Wishlist.Domain.Interfaces;
+using Core.Utils.Security;
 
 namespace Wedding.Wishlist.Application.RequestHandlers
 {
@@ -16,8 +16,9 @@ namespace Wedding.Wishlist.Application.RequestHandlers
         ILogger<CreateUserItemCommandHandler> logger,
         IMapper mapper,
         IUnitOfWork unitOfWork,
-        IServiceProvider serviceProvider)     
-        : BaseRequestHandler<CreateUserItemCommand, CreateUserItemCommandResult>(logger, mapper, unitOfWork, serviceProvider)
+        IServiceProvider serviceProvider,
+        IHttpContextAccessor httpContextAccessor)     
+        : BaseRequestHandler<CreateUserItemCommand, CreateUserItemCommandResult>(logger, mapper, unitOfWork, serviceProvider, httpContextAccessor)
     {        
         public override async Task<CreateUserItemCommandResult?> Execute(CreateUserItemCommand command, CancellationToken cancellationToken)
         {
@@ -28,7 +29,7 @@ namespace Wedding.Wishlist.Application.RequestHandlers
 
             try
             {
-                var logService = _serviceProvider.GetRequiredService<ILogService>();
+                var logService = _serviceProvider.GetRequiredService<ILogService>();                
 
                 logService.CreateLog(LogType.Information, "New user item created.", referenceType: "WISHLIST_USER_ITEM");
 
