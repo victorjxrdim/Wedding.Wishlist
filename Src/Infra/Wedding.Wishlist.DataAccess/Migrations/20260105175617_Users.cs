@@ -19,6 +19,7 @@ namespace Wedding.Wishlist.DataAccess.Migrations
                     EMAIL = table.Column<string>(maxLength: 256, nullable: false),
                     HASH_PASSWORD = table.Column<string>(maxLength: 256, nullable: false),
                     HASH_VERSION = table.Column<string>(maxLength: 10, nullable: false),
+                    IS_ADMIN = table.Column<int>(nullable: false),
                     CREATED_AT = table.Column<DateTimeOffset>(nullable: false)
                 },
                 constraints: table =>

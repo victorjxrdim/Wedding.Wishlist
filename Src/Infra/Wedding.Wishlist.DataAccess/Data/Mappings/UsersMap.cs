@@ -15,6 +15,7 @@ namespace Wedding.Wishlist.DataAccess.Data.Mappings
             builder.Property(x => x.Email).HasColumnName("EMAIL");
             builder.Property(x => x.HashPassword).HasColumnName("HASH_PASSWORD");
             builder.Property(x => x.HashVersion).HasColumnName("HASH_VERSION");
+            builder.Property(x => x.IsAdmin).HasColumnName("IS_ADMIN");
             builder.Property(x => x.CreatedAt).HasColumnName("CREATED_AT");
         }
     }

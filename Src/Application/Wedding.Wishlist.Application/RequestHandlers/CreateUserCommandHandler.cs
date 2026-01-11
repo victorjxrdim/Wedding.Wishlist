@@ -44,16 +44,17 @@ namespace Wedding.Wishlist.Application.RequestHandlers
                 userDto.HashPassword = hashPassword;
                 userDto.HashVersion = hashVersion;
 
-                await usersRepository.CreateAsync(_mapper.Map<Users>(userDto), cancellationToken);
+                var createdUser = await usersRepository.CreateAsync(_mapper.Map<Users>(userDto), cancellationToken);
 
                 await _unitOfWork.CommitAsync(cancellationToken);
 
-                logService.CreateLog(LogType.Information, "New user created.");
+                logService.CreateLog(LogType.Information, "New user created.", referenceId: createdUser!.Id.ToString(), referenceType: "USERS");
 
                 return Ok(new CreateUserCommandResult("User successfully created."));
             }
             catch (Exception ex) 
             {
+                _logger.LogError(ex, "Error creating user.");
                 return InternalServerError($"Erro {ex}");
             }            
         }

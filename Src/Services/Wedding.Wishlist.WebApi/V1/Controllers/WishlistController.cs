@@ -34,5 +34,15 @@ namespace Wedding.Wishlist.WebApi.V1.Controllers
 
             return Ok(response);
         }
+
+        [HttpPost("{wishlistId}/user-item")]
+        public async Task<IActionResult> CreateUserWishlistItem(string wishlistId)
+        {
+            var command = new CreateUserItemCommand(wishlistId);
+
+            var response = await _mediator.Send(command);
+
+            return Ok(response);
+        }
     }
 }

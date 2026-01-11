@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Wedding.Wishlist.Application.Services;
 using Wedding.Wishlist.Domain.Entities;
+using Wedding.Wishlist.Domain.Interfaces;
 
 namespace Wedding.Wishlist.Application.Extensions
 {
@@ -9,10 +11,12 @@ namespace Wedding.Wishlist.Application.Extensions
         {
             #region Services
 
+            services.AddScoped<ILogService, LogService>();
+
             #endregion
 
             #region AutoMapper
-                
+
             services.AddAutoMapper(x =>
             {
                 #region Entity - DTO
