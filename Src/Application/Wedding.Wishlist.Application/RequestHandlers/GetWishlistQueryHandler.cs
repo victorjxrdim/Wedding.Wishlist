@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Application.Interfaces;
 using Core.Application.RequestHandlers;
 using Core.Domain.Interfaces;
 using Microsoft.Extensions.Logging;
@@ -12,8 +13,9 @@ namespace Wedding.Wishlist.Application.RequestHandlers
         ILogger<GetWishlistQueryHandler> logger,
         IMapper mapper,
         IUnitOfWork unitOfWork,
-        IServiceProvider serviceProvider)     
-        : BaseRequestHandler<GetWishlistQuery, GetWishlistQueryResult>(logger, mapper, unitOfWork, serviceProvider)
+        IServiceProvider serviceProvider,
+        ICurrentUser currentUser)     
+        : BaseRequestHandler<GetWishlistQuery, GetWishlistQueryResult>(logger, mapper, unitOfWork, serviceProvider, currentUser)
     {        
         public async override Task<GetWishlistQueryResult?> Execute(GetWishlistQuery request, CancellationToken cancellationToken)
         {

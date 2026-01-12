@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
+using Core.Application.Interfaces;
 using Core.Application.RequestHandlers;
 using Core.Domain.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Wedding.Wishlist.Application.Requests;
 using Wedding.Wishlist.Application.Responses;
+using Wedding.Wishlist.Domain.Entities;
 using Wedding.Wishlist.Domain.Enums;
 using Wedding.Wishlist.Domain.Interfaces;
-using Core.Utils.Security;
 
 namespace Wedding.Wishlist.Application.RequestHandlers
 {
@@ -17,8 +17,8 @@ namespace Wedding.Wishlist.Application.RequestHandlers
         IMapper mapper,
         IUnitOfWork unitOfWork,
         IServiceProvider serviceProvider,
-        IHttpContextAccessor httpContextAccessor)     
-        : BaseRequestHandler<CreateUserItemCommand, CreateUserItemCommandResult>(logger, mapper, unitOfWork, serviceProvider, httpContextAccessor)
+        ICurrentUser currentUser)     
+        : BaseRequestHandler<CreateUserItemCommand, CreateUserItemCommandResult>(logger, mapper, unitOfWork, serviceProvider, currentUser)
     {        
         public override async Task<CreateUserItemCommandResult?> Execute(CreateUserItemCommand command, CancellationToken cancellationToken)
         {
@@ -29,9 +29,38 @@ namespace Wedding.Wishlist.Application.RequestHandlers
 
             try
             {
-                var logService = _serviceProvider.GetRequiredService<ILogService>();                
+                var logService = _serviceProvider.GetRequiredService<ILogService>();
+                var wishlistUserItemRepository = _unitOfWork.Repository<WishlistUserItem, Guid>();
+                var wishlistRepository = _unitOfWork.Repository<Wishlists, Guid>();
+                var userRepository = _unitOfWork.Repository<Users, Guid>();                
 
-                logService.CreateLog(LogType.Information, "New user item created.", referenceType: "WISHLIST_USER_ITEM");
+                var wishlist = await wishlistRepository.GetByIdAsync(command.WishlistId, cancellationToken);
+                
+                if (wishlist == null)
+                {
+                    return NotFound($"Wishlist with Id: {command.WishlistId} not found.");
+                }
+
+                var wishlistDto = _mapper.Map<WishlistsDto>(wishlist);
+
+                var user = await userRepository.GetByIdAsync(_currentUser!.UserId, cancellationToken);
+
+                if (user == null) 
+                { 
+                    return NotFound($"User with Id: {_currentUser.UserId} not found.");
+                }
+
+                var userItem = new WishlistUserItemDto()
+                {
+                    UserId = user.Id,
+                    WishlistsId = wishlist.Id
+                };                                
+                                
+                var wishlistUserItem = await wishlistUserItemRepository.CreateAsync(_mapper.Map<WishlistUserItem>(userItem), cancellationToken);                
+
+                logService.CreateLog(LogType.Information, "New user item created.", referenceType: "WISHLIST_USER_ITEM", referenceId: wishlistUserItem!.Id.ToString(), usersId: user.Id);
+
+                await _unitOfWork.CommitAsync(cancellationToken);
 
                 return Ok(new CreateUserItemCommandResult("Item successfully created."));
             }
