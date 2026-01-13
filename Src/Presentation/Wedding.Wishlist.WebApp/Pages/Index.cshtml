@@ -1,10 +1,16 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Início";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center mb-5">
+    <h1 class="fw-semibold">Nossa Lista de Casamento</h1>
+    <p class="text-muted">
+        Escolha um presente e faça parte desse momento especial 💕
+    </p>
+
+    <a asp-page="/Wishlist/Index" class="btn btn-primary btn-lg mt-3">
+        Ver Lista de Presentes
+    </a>
 </div>
