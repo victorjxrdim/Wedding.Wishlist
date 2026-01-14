@@ -16,7 +16,7 @@ namespace Wedding.Wishlist.WebApi.V1.Controllers
         private readonly ICookieAuthService _cookieAuthService = cookieAuthService;
         
         [HttpPost("Login/{email}/{password}")]
-        public async Task<IActionResult> Login(string email, string password)
+        public async Task<IActionResult> LoginAsync(string email, string password)
         {
             var command = new LoginAuthCommand(email, password);
 
@@ -25,9 +25,10 @@ namespace Wedding.Wishlist.WebApi.V1.Controllers
             if (result.StatusCode == 200)
             {
                 _cookieAuthService.SetCookie(result.Data!.Token!);
-            }            
+                return Ok();
+            }
 
-            return Ok();
+            return Unauthorized();
         }
 
         [HttpPost("Logout")]

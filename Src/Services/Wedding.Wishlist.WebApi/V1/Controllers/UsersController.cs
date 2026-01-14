@@ -16,7 +16,7 @@ namespace Wedding.Wishlist.WebApi.V1.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
 
         [HttpPost]
-        public async Task<IActionResult> CreateUser(CreateUserRequest request)
+        public async Task<IActionResult> CreateUserAsync(CreateUserRequest request)
         {
             var command = request.ToCommand();
 

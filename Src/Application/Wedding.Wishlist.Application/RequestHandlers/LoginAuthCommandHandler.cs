@@ -44,7 +44,7 @@ namespace Wedding.Wishlist.Application.RequestHandlers
                     return Unauthorized(new LoginAuthCommandResult(message: "Invalid password."));
                 }
 
-                var token = tokenGenerator.GenerateToken(user.Id, user.Email, user.Name);
+                var token = tokenGenerator.GenerateToken(user.Id, user.Email, user.Name, user.IsAdmin);
 
                 return Ok(new LoginAuthCommandResult(authToken: token));
 

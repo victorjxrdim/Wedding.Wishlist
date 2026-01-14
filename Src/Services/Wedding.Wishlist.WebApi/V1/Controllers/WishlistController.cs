@@ -17,8 +17,9 @@ namespace Wedding.Wishlist.WebApi.V1.Controllers
         private readonly IMediator _mediator = mediator;
         private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<IActionResult> CreateWishlistItem(CreateWishlistItemRequest request)
+        public async Task<IActionResult> CreateWishlistItemAsync(CreateWishlistItemRequest request)
         {
             var command = request.ToCommand();
 
@@ -28,7 +29,7 @@ namespace Wedding.Wishlist.WebApi.V1.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetWishlists()
+        public async Task<IActionResult> GetWishlistsAsync()
         {
             var query = new GetWishlistQuery();
 
@@ -38,7 +39,7 @@ namespace Wedding.Wishlist.WebApi.V1.Controllers
         }
 
         [HttpPost("{wishlistId}/user-item")]
-        public async Task<IActionResult> CreateUserWishlistItem(string wishlistId)
+        public async Task<IActionResult> CreateUserWishlistItemAsync(string wishlistId)
         {
             var command = new CreateUserItemCommand(wishlistId);
 

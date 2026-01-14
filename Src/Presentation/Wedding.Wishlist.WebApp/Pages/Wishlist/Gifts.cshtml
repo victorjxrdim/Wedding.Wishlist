@@ -1,4 +1,4 @@
-﻿@page "/presentes"
+﻿@page "/Gifts"
 @model WishlistIndexModel
 @{
     ViewData["Title"] = "Lista de Presentes";
@@ -21,8 +21,7 @@
                 </div>
 
                 <div class="card-footer bg-white border-0">
-                    <a asp-page="/Wishlist/Details"
-                       asp-route-id="@item.Id"
+                    <a href="/Details/@item.Id"                       
                        class="btn btn-outline-primary w-100">
                         Ver detalhes
                     </a>
@@ -31,3 +30,9 @@
         </div>
     }
 </div>
+
+@section Scripts {
+    <script>
+        // Scripts específicos para esta página, se necessário
+    </script>
+}   

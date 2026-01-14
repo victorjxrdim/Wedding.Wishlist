@@ -26,3 +26,25 @@ body {
 .card {
     border-radius: 1rem;
 }
+
+.auth-card {
+    max-width: 420px;
+    margin: auto;
+}
+
+    .auth-card .card {
+        border-radius: 1.2rem;
+    }
+
+.auth-title {
+    font-weight: 600;
+}
+
+.auth-link {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+    .auth-link:hover {
+        text-decoration: underline;
+    }
