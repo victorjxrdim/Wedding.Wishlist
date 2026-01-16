@@ -4,24 +4,69 @@
     ViewData["Title"] = "Lista de Presentes";
 }
 
-<h2 class="mb-4">🎁 Lista de Presentes</h2>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">🎁 Lista de Presentes</h2>
+    
+    @if (User.IsInRole("Admin"))
+    {
+        <button class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#createGiftModal">
+            ➕ Adicionar Presente
+        </button>
+    }
+</div>
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
     @foreach (var item in Model.Items)
     {
         <div class="col">
-            <div class="card shadow-sm h-100">
-                <img src="@item.ImageUrl" class="card-img-top" alt="Presente">
+            <div class="card shadow-sm h-100 position-relative">
+                @if (User.IsInRole("Admin"))
+                {
+                    <div class="position-absolute top-0 end-0 p-2 d-flex gap-1">
+                        <a href="/Gifts/Edit/@item.Id"
+                           class="btn btn-sm btn-outline-secondary"
+                           title="Editar">
+                            ✏️
+                        </a>
+
+                        <button class="btn btn-sm btn-outline-danger"
+                                title="Remover"
+                                onclick="confirmRemove('@item.Id')">
+                            🗑️
+                        </button>
+                    </div>
+                }
+
+                <img src="@item.ImageUrl"
+                     class="card-img-top"
+                     alt="@item.Name"
+                     style="object-fit: cover; height: 200px;" />
 
                 <div class="card-body">
                     <h5 class="card-title">@item.Name</h5>
-                    <p class="card-text text-muted">@item.Description</p>
 
-                    <span class="badge badge-available">Disponível</span>
+                    <p class="card-text text-muted">
+                        @item.Description
+                    </p>
+
+                    @if(item.IsActive == 1){
+                        <span class="badge bg-success">
+                            Disponível
+                        </span>
+                    } 
+                    else
+                    {
+                        <span class="badge bg-danger">
+                            Indisponível
+                        </span>
+                    }
+
                 </div>
 
                 <div class="card-footer bg-white border-0">
-                    <a href="/Details/@item.Id"                       
+                    <a href="/Details/@item.Id"
                        class="btn btn-outline-primary w-100">
                         Ver detalhes
                     </a>
@@ -31,8 +76,8 @@
     }
 </div>
 
+@await Html.PartialAsync("_CreateGiftsModal")
+
 @section Scripts {
-    <script>
-        // Scripts específicos para esta página, se necessário
-    </script>
-}   
+    <script src="/js/gifts.js"></script>
+}

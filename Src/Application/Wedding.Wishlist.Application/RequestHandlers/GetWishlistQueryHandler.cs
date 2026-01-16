@@ -23,6 +23,19 @@ namespace Wedding.Wishlist.Application.RequestHandlers
             {
                 var wishlistRepository = _unitOfWork.Repository<Wishlists, Guid>();
 
+                if (request.WishlistId != null)
+                {
+                    if(!Guid.TryParse(request.WishlistId, out Guid parsedId))
+                    {
+                        return BadRequest(request.GetValidationResult());
+                    }
+
+                    return Ok(new GetWishlistQueryResult(new List<WishlistsDto> 
+                    { 
+                        _mapper.Map<WishlistsDto>(await wishlistRepository.GetByIdAsync(parsedId, cancellationToken: cancellationToken)) 
+                    }) );
+                }
+                
                 var listWishlist = _mapper.Map<List<WishlistsDto>>(await wishlistRepository.ListAsync(cancellationToken: cancellationToken));
 
                 return Ok(new GetWishlistQueryResult(listWishlist));

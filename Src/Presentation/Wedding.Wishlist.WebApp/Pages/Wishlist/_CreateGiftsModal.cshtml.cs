@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-public class RegisterModel : PageModel
-{
+public class CreateGiftsModal : PageModel
+{   
     public void OnGet()
     {
     }

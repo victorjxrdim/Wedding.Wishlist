@@ -2,14 +2,11 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 
-public class LoginModel
+public class LoginModel(
+    IHttpClientFactory factory)
     : PageModel
 {
-    private readonly IHttpClientFactory _factory;
-    public LoginModel(IHttpClientFactory factory)
-    {
-        _factory = factory;
-    }
+    private readonly IHttpClientFactory _factory = factory;
 
     [BindProperty]
     [Required(ErrorMessage = "O e-mail é obrigatório")]

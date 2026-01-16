@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
+	
   <ItemGroup>
     <ProjectReference Include="..\..\Domain\Wedding.Wishlist.Domain\Wedding.Wishlist.Domain.csproj" />
     <ProjectReference Include="..\..\Packages\Core.Infra\Core.Infra.Data\Core.Infra.DataAccess.csproj" />

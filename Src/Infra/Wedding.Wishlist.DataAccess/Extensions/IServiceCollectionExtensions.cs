@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Wedding.Wishlist.DataAccess.Data.Contexts;
+using Wedding.Wishlist.DataAccess.Data.Repositories;
+using Wedding.Wishlist.Domain.Interfaces;
 
 namespace Wedding.Wishlist.DataAccess.Extensions
 {
@@ -29,6 +31,8 @@ namespace Wedding.Wishlist.DataAccess.Extensions
             #endregion
 
             #region Repository
+
+            services.AddScoped<IWishlistRepository, WishlistRepository>();
 
             #endregion
 

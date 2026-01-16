@@ -8,12 +8,10 @@ namespace Wedding.Wishlist.WebApi.V1.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController(
-        IMediator mediator,
-        IHttpContextAccessor httpContextAccessor)
+        IMediator mediator)
         : ControllerBase
     {
-        private readonly IMediator _mediator = mediator;
-        private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
+        private readonly IMediator _mediator = mediator;        
 
         [HttpPost]
         public async Task<IActionResult> CreateUserAsync(CreateUserRequest request)

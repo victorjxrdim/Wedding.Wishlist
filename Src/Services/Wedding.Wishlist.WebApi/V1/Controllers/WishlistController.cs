@@ -5,17 +5,14 @@ using Wedding.Wishlist.Application.Requests;
 using Wedding.Wishlist.WebApi.V1.Contracts.Requests;
 
 namespace Wedding.Wishlist.WebApi.V1.Controllers
-{
-    [Authorize]
+{    
     [Route("api/[controller]")]
     [ApiController]
     public class WishlistController(
-        IMediator mediator,
-        IHttpContextAccessor httpContextAccessor)
+        IMediator mediator)
         : ControllerBase
     {
-        private readonly IMediator _mediator = mediator;
-        private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
+        private readonly IMediator _mediator = mediator;        
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
@@ -29,19 +26,43 @@ namespace Wedding.Wishlist.WebApi.V1.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetWishlistsAsync()
+        [HttpGet("{wishlistId}")]
+        public async Task<IActionResult> GetWishlistsAsync(string? wishlistId = null)
         {
-            var query = new GetWishlistQuery();
+            var query = new GetWishlistQuery(wishlistId);
 
             var response = await _mediator.Send(query);
 
             return Ok(response);
         }
 
+        [Authorize]
         [HttpPost("{wishlistId}/user-item")]
         public async Task<IActionResult> CreateUserWishlistItemAsync(string wishlistId)
         {
             var command = new CreateUserItemCommand(wishlistId);
+
+            var response = await _mediator.Send(command);
+
+            return Ok(response);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPut("{wishlistId}")]
+        public async Task<IActionResult> EditWishlistAsync([FromBody] EditWishlistRequest request, string wishlistId)
+        {
+            var command = request.ToCommand(wishlistId);
+
+            var response = await _mediator.Send(command);
+
+            return Ok(response);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("{wishlistId}")]
+        public async Task<IActionResult> DeleteWishlistAsync(string wishlistId)
+        {
+            var command = new DeleteWishlistCommand(wishlistId);
 
             var response = await _mediator.Send(command);
 

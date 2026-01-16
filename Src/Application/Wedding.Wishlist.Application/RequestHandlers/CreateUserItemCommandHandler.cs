@@ -31,10 +31,11 @@ namespace Wedding.Wishlist.Application.RequestHandlers
             {
                 var logService = _serviceProvider.GetRequiredService<ILogService>();
                 var wishlistUserItemRepository = _unitOfWork.Repository<WishlistUserItem, Guid>();
-                var wishlistRepository = _unitOfWork.Repository<Wishlists, Guid>();
+                var wishlistGenericRepository = _unitOfWork.Repository<Wishlists, Guid>();
+                var wishlistRepository = _serviceProvider.GetRequiredService<IWishlistRepository>();
                 var userRepository = _unitOfWork.Repository<Users, Guid>();                
 
-                var wishlist = await wishlistRepository.GetByIdAsync(command.WishlistId, cancellationToken);
+                var wishlist = await wishlistGenericRepository.GetByIdAsync(command.WishlistId, cancellationToken);
                 
                 if (wishlist == null)
                 {
@@ -56,7 +57,9 @@ namespace Wedding.Wishlist.Application.RequestHandlers
                     WishlistsId = wishlist.Id
                 };                                
                                 
-                var wishlistUserItem = await wishlistUserItemRepository.CreateAsync(_mapper.Map<WishlistUserItem>(userItem), cancellationToken);                
+                var wishlistUserItem = await wishlistUserItemRepository.CreateAsync(_mapper.Map<WishlistUserItem>(userItem), cancellationToken);
+                
+                wishlistRepository.UpdateWishlistStatus(wishlist.Id);
 
                 logService.CreateLog(LogType.Information, "New user item created.", referenceType: "WISHLIST_USER_ITEM", referenceId: wishlistUserItem!.Id.ToString(), usersId: user.Id);
 

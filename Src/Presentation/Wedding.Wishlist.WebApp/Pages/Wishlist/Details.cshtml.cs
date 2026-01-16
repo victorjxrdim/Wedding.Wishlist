@@ -1,18 +1,35 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Wedding.Wishlist.WebApp.Contracts.Responses;
+using Wedding.Wishlist.WebApp.ViewModels;
 
-public class WishlistDetailsModel : PageModel
+public class WishlistDetailsModel(
+    IHttpClientFactory factory)
+    : PageModel
 {
+    private readonly IHttpClientFactory _factory = factory;
+
     public WishlistItemViewModel Item { get; set; } = new();
 
-    public void OnGet(string id)
+    public async Task OnGetAsync(string wishlistId)
     {
-        Item = new()
+        var client = _factory.CreateClient("WeddingWishlistWebApiClient");
+
+        var response = await client.GetFromJsonAsync<GetWishlistResponse>($"/api/Wishlist/{wishlistId}");
+
+        if (response?.Data?.Wishlist == null || response.Data.Wishlist.Count == 0)
         {
-            Id = id,
-            Name = "Presente Exemplo",
-            Description = "Descrição completa do presente",
-            ImageUrl = "https://via.placeholder.com/600"
-        };
+            return;
+        }
+
+        Item = response.Data.Wishlist.Select(x => new WishlistItemViewModel
+        {
+            Id = x.Id.ToString(),
+            Name = x.Name,
+            Description = x.Description,
+            Category = x.Category,
+            Url = x.Url,
+            ImageUrl = x.ImageUrl,
+            IsActive = x.IsActive
+        }).FirstOrDefault()!;
     }
 }

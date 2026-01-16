@@ -4,7 +4,8 @@ using Wedding.Wishlist.Domain.Entities;
 
 namespace Wedding.Wishlist.Application.Requests
 {
-    public class GetWishlistQuery : BaseRequest<GetWishlistQuery, GetWishlistQueryResult>
-    {        
+    public class GetWishlistQuery(string? wishlistId = null) : BaseRequest<GetWishlistQuery, GetWishlistQueryResult>
+    {
+        public string? WishlistId { get; } = wishlistId;
     }
 }

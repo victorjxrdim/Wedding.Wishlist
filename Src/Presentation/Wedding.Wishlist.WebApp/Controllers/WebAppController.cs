@@ -7,19 +7,36 @@ namespace Wedding.Wishlist.WebApp.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class WebAppController(
-        IHttpClientFactory factory,
-        IServiceProvider serviceProvider)
+        IHttpClientFactory factory)
         : ControllerBase
-    {
-        private readonly IHttpClientFactory _factory = factory;
-        private readonly IServiceProvider _serviceProvider = serviceProvider;
-
+    {        
         private readonly HttpClient _httpClient = factory.CreateClient("WeddingWishlistWebApiClient");
 
+        [IgnoreAntiforgeryToken]
         [HttpPost("User")]
         public async Task<IActionResult> CreateUserAsync(CreateUserRequest request)
         {
             var httpResponse = await _httpClient.PostAsJsonAsync($"/api/Users", request);
+
+            var responseContent = await httpResponse.Content.ReadAsStringAsync();
+
+            return StatusCode((int)httpResponse.StatusCode, responseContent);
+        }
+
+        [HttpPost("Wishlists/Item")]
+        public async Task<IActionResult> CreateWishlistItemAsync(CreateWishlistItemRequest request)
+        {
+            var httpResponse = await _httpClient.PostAsJsonAsync($"/api/Wishlist", request);
+
+            var responseContent = await httpResponse.Content.ReadAsStringAsync();
+
+            return StatusCode((int)httpResponse.StatusCode, responseContent);
+        }
+
+        [HttpDelete("Wishlists/{wishlistId}")]
+        public async Task<IActionResult> DeleteWishlistAsync(string wishlistId)
+        {
+            var httpResponse = await _httpClient.DeleteAsync($"/api/Wishlist/{wishlistId}");
 
             var responseContent = await httpResponse.Content.ReadAsStringAsync();
 
