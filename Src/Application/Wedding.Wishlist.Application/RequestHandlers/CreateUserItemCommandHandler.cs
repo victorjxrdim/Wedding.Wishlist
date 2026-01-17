@@ -39,7 +39,7 @@ namespace Wedding.Wishlist.Application.RequestHandlers
                 
                 if (wishlist == null)
                 {
-                    return NotFound($"Wishlist with Id: {command.WishlistId} not found.");
+                    return NotFound($"Wishlist with id: {command.WishlistId} cannot be found.");
                 }
 
                 var wishlistDto = _mapper.Map<WishlistsDto>(wishlist);
@@ -48,7 +48,7 @@ namespace Wedding.Wishlist.Application.RequestHandlers
 
                 if (user == null) 
                 { 
-                    return NotFound($"User with Id: {_currentUser.UserId} not found.");
+                    return NotFound($"User with id: {_currentUser.UserId} not found.");
                 }
 
                 var userItem = new WishlistUserItemDto()

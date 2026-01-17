@@ -38,7 +38,7 @@ namespace Wedding.Wishlist.Application.RequestHandlers
 
                 if (getWishlist == null)
                 {
-                    return NotFound($"Wishlist com Id {command.WishlistId} não encontrado.");
+                    return NotFound($"Wishlist with id: {command.WishlistId}  cannot be found.");
                 }
 
                 var getUserItem = await wishlistsItemsRepository.GetWhereAsync(x => x.WishlistsId == command.WishlistId, cancellationToken);

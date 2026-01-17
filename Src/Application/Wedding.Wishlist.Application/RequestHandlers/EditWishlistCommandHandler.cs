@@ -32,29 +32,34 @@ namespace Wedding.Wishlist.Application.RequestHandlers
             {
                 var logService = _serviceProvider.GetRequiredService<ILogService>();
                 var wishlistsRepository = _unitOfWork.Repository<Wishlists, Guid>();
-                
-                var getWishlist = await wishlistsRepository.GetByIdAsync(command.Id);
 
-                if (getWishlist == null)
+                var wishlist = await wishlistsRepository.GetByIdAsync(command.Id);
+
+                if (wishlist == null)
                 {
-                    return NotFound($"Wishlist com Id {command.Id} não encontrado.");
+                    return NotFound($"Wishlist with id: {command.Id} cannot be found.");
                 }
 
-                var wishlistDto = _mapper.Map<WishlistsDto>(getWishlist);
-
-                wishlistDto.Name = command.Name ?? wishlistDto.Name;
-                wishlistDto.Description = command.Description ?? wishlistDto.Description;
-                wishlistDto.Category = command.Category != 0 ? command.Category : wishlistDto.Category;
-                wishlistDto.Url = command.Url ?? wishlistDto.Url;
-                wishlistDto.ImageUrl = command.ImageUrl ?? wishlistDto.ImageUrl;
-
-                var updateWishlist = wishlistsRepository.Update(_mapper.Map<Wishlists>(wishlistDto));
-
-                logService.CreateLog(LogType.Information, "Wishlist item edited", referenceType: "WISHLISTS", referenceId: updateWishlist!.Id.ToString(), usersId: _currentUser!.UserId);
-
+                wishlist.Name = command.Name ?? wishlist.Name;
+                wishlist.Description = command.Description ?? wishlist.Description;
+                wishlist.Category = command.Category != 0 ? command.Category : wishlist.Category;
+                wishlist.Url = command.Url ?? wishlist.Url;
+                wishlist.ImageUrl = command.ImageUrl ?? wishlist.ImageUrl;
+                
                 await _unitOfWork.CommitAsync();
 
-                return Ok(new EditWishlistCommandResult(wishlistDto));
+                logService.CreateLog(
+                    LogType.Information,
+                    "Wishlist item edited",
+                    referenceType: "WISHLISTS",
+                    referenceId: wishlist.Id.ToString(),
+                    usersId: _currentUser!.UserId
+                );
+
+                return Ok(new EditWishlistCommandResult(
+                    _mapper.Map<WishlistsDto>(wishlist)
+                ));
+
             }
             catch (Exception ex) 
             {

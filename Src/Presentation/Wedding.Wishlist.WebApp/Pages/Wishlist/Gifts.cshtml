@@ -25,15 +25,14 @@
                 @if (User.IsInRole("Admin"))
                 {
                     <div class="position-absolute top-0 end-0 p-2 d-flex gap-1">
-                        <a href="/Gifts/Edit/@item.Id"
-                           class="btn btn-sm btn-outline-secondary"
-                           title="Editar">
+                        <button type="button" class="btn btn-sm btn-outline-secondary btn-edit-gift"
+                                data-item-id="@item.Id">
                             ✏️
-                        </a>
+                        </button>
 
                         <button class="btn btn-sm btn-outline-danger"
                                 title="Remover"
-                                onclick="confirmRemove('@item.Id')">
+                                onclick="onDeleteClick('@item.Id')">
                             🗑️
                         </button>
                     </div>
@@ -77,7 +76,14 @@
 </div>
 
 @await Html.PartialAsync("_CreateGiftsModal")
+@await Html.PartialAsync("_EditGiftsModal")
 
-@section Scripts {
-    <script src="/js/gifts.js"></script>
+@section Scripts {    
+    <script>
+        const gifts = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Items));
+        window.gifts = gifts;
+    </script>
+
+    <script src="/js/pages/wedding/gifts.js"></script>
+    <script src="/js/pages/wedding/_editGiftsModal.js"></script>
 }

@@ -9,7 +9,7 @@ namespace Wedding.Wishlist.WebApp.Controllers
     public class WebAppController(
         IHttpClientFactory factory)
         : ControllerBase
-    {        
+    {
         private readonly HttpClient _httpClient = factory.CreateClient("WeddingWishlistWebApiClient");
 
         [IgnoreAntiforgeryToken]
@@ -37,6 +37,16 @@ namespace Wedding.Wishlist.WebApp.Controllers
         public async Task<IActionResult> DeleteWishlistAsync(string wishlistId)
         {
             var httpResponse = await _httpClient.DeleteAsync($"/api/Wishlist/{wishlistId}");
+
+            var responseContent = await httpResponse.Content.ReadAsStringAsync();
+
+            return StatusCode((int)httpResponse.StatusCode, responseContent);
+        }
+
+        [HttpPut("Wishlist/Edit/{wishlistId}")]
+        public async Task<IActionResult> EditWishlistAsync([FromBody] EditWishlistRequest request, string wishlistId)
+        {
+            var httpResponse = await _httpClient.PutAsJsonAsync($"/api/Wishlist/{wishlistId}", request);
 
             var responseContent = await httpResponse.Content.ReadAsStringAsync();
 
