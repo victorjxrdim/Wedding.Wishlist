@@ -4,7 +4,7 @@
     {
         Unknown,
         Home,
-        Travel,
+        Wedding,
         Honeymoon,
     }
 }

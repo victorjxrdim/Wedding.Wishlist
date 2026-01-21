@@ -61,6 +61,27 @@
                             Indisponível
                         </span>
                     }
+                    
+                    @if(item.Category == 1)
+                    {
+                        <span class="badge bg-info text-dark">
+                            Casa
+                        </span>
+                    }
+
+                    @if(item.Category == 2)
+                    {
+                        <span class="badge bg-primary">
+                            Casamento
+                        </span>
+                    }
+
+                    @if (item.Category == 3)
+                    {
+                        <span class="badge bg-warning text-dark">
+                            Lua de Mel
+                        </span>
+                    }
 
                 </div>
 
