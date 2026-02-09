@@ -19,7 +19,8 @@ namespace Wedding.Wishlist.DataAccess.Migrations
                     DESCRIPTION = table.Column<string>(maxLength: 1000, nullable: false),
                     CATEGORY = table.Column<int>(nullable: false),
                     URL = table.Column<string>(maxLength: 2000, nullable: false),
-                    IMAGE_URL = table.Column<string>(nullable: false),
+                    PRODUCT_IMAGE_URL = table.Column<string>(maxLength: 2000, nullable: false),
+                    QR_CODE_URL = table.Column<string>(nullable: false),
                     IS_ACTIVE = table.Column<int>(maxLength: 10, nullable: false),
                     CREATED_AT = table.Column<DateTimeOffset>(nullable: false)
                 },

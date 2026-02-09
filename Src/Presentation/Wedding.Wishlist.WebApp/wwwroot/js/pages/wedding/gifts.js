@@ -9,7 +9,8 @@
             description: formData.get("description"),
             category: Number(formData.get("category")),
             url: formData.get("productLink"),
-            imageUrl: formData.get("imageLink")
+            productImageUrl: formData.get("imageLink"),
+            qrCodeUrl: formData.get("qrCodeLink")
         };
 
         try {

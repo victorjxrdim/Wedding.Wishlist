@@ -44,8 +44,9 @@ namespace Wedding.Wishlist.Application.RequestHandlers
                 wishlist.Description = command.Description ?? wishlist.Description;
                 wishlist.Category = command.Category != 0 ? command.Category : wishlist.Category;
                 wishlist.Url = command.Url ?? wishlist.Url;
-                wishlist.ImageUrl = command.ImageUrl ?? wishlist.ImageUrl;
-                
+                wishlist.ProductImageUrl = command.ProductImageUrl ?? wishlist.ProductImageUrl;
+                wishlist.QrCodeUrl = command.QrCodeUrl ?? wishlist.QrCodeUrl;
+
                 await _unitOfWork.CommitAsync();
 
                 logService.CreateLog(

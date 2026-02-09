@@ -13,7 +13,8 @@ namespace Wedding.Wishlist.Application.Requests
         public string Description { get; set; } = string.Empty;
         public Category Category { get; set; } = Category.Unknown;
         public string Url { get; set; } = string.Empty;
-        public string ImageUrl { get; set; } = string.Empty;
+        public string ProductImageUrl { get; set; } = string.Empty;
+        public string QrCodeUrl { get; set; } = string.Empty;
         public WishlistsDto ToDto()
         {
             return new WishlistsDto
@@ -23,7 +24,8 @@ namespace Wedding.Wishlist.Application.Requests
                 Description = Description,
                 Category = Category,
                 Url = Url,
-                ImageUrl = ImageUrl
+                ProductImageUrl = ProductImageUrl,
+                QrCodeUrl = QrCodeUrl,
             };
         }
 

@@ -9,8 +9,9 @@ namespace Wedding.Wishlist.WebApi.V1.Contracts.Requests
         public string Description { get; set; } = string.Empty;
         public int Category { get; set; } = 0;
         public string Url { get; set; } = string.Empty;
-        public string ImageUrl { get; set; } = string.Empty;
-        
+        public string ProductImageUrl { get; set; } = string.Empty;
+        public string QrCodeUrl { get; set; } = string.Empty;
+
         public CreateWishlistItemCommand ToCommand()
         {
             var command = new CreateWishlistItemCommand
@@ -19,7 +20,8 @@ namespace Wedding.Wishlist.WebApi.V1.Contracts.Requests
                 Description = Description,
                 Category = (Category)Category,
                 Url = Url,
-                ImageUrl = ImageUrl
+                ProductImageUrl = ProductImageUrl,
+                QrCodeUrl = QrCodeUrl
             };
 
             return command;

@@ -9,7 +9,8 @@ namespace Wedding.Wishlist.WebApi.V1.Contracts.Requests
         public string? Description { get; set; }
         public Category? Category { get; set; }
         public string? Url { get; set; }
-        public string? ImageUrl { get; set; }
+        public string? ProductImageUrl { get; set; }
+        public string? QrCodeUrl { get; set; }
 
         public EditWishlistCommand ToCommand(string wishlistId)
         {
@@ -20,7 +21,8 @@ namespace Wedding.Wishlist.WebApi.V1.Contracts.Requests
                 Description = Description ?? string.Empty,
                 Category = Category ?? Domain.Enums.Category.Unknown,
                 Url = Url ?? string.Empty,
-                ImageUrl = ImageUrl ?? string.Empty
+                ProductImageUrl = ProductImageUrl ?? string.Empty,
+                QrCodeUrl = QrCodeUrl ?? string.Empty
             };
 
             return command;

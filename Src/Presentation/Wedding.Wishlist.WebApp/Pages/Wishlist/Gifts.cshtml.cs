@@ -27,7 +27,8 @@ public class WishlistIndexModel(
             Description = x.Description,
             Category = x.Category,
             Url = x.Url,
-            ImageUrl = x.ImageUrl,
+            ProductImageUrl = x.ProductImageUrl,
+            QrCodeUrl = x.QrCodeUrl,
             IsActive = x.IsActive
         }).ToList();
     }

@@ -13,7 +13,8 @@
         editGiftForm.elements["name"].value = item.Name;
         editGiftForm.elements["description"].value = item.Description;
         editGiftForm.elements["category"].value = item.Category;
-        editGiftForm.elements["imageLink"].value = item.ImageUrl;
+        editGiftForm.elements["imageLink"].value = item.ProductImageUrl;
+        editGiftForm.elements["qrCodeLink"].value = item.QrCodeUrl;
         editGiftForm.elements["productLink"].value = item.Url;
 
         const modal = new bootstrap.Modal(editGiftModalEl);
@@ -37,7 +38,8 @@
             description: formData.get("description"),
             category: Number(formData.get("category")),
             url: formData.get("productLink"),
-            imageUrl: formData.get("imageLink")
+            productImageUrl: formData.get("imageLink"),
+            qrCodeUrl: formData.get("qrCodeLink")
         };
 
         const confirmed = await confirmAction({
