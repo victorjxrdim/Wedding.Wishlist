@@ -14,6 +14,7 @@
         <p class="text-muted">@Model.Item.Description</p>
 
         <button class="btn btn-primary btn-lg mt-3"
+                id="@Model.Item.Id"
                 data-bs-toggle="modal"
                 data-bs-target="#choosePresentModal">
             Escolher este presente 💖
@@ -24,7 +25,5 @@
 @await Html.PartialAsync("_ChoosePresentModal")
 
 @section Scripts {
-    <script>
-        // Scripts específicos para esta página, se necessário
-    </script>
+    <script src="~/js/pages/wedding/_choosePresentModal.js"></script>
 }

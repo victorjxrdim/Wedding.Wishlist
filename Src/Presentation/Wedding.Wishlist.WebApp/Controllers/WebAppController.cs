@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Wedding.Wishlist.WebApp.Contracts.Requests;
+using Wedding.Wishlist.WebApp.Contracts.Responses;
 
 namespace Wedding.Wishlist.WebApp.Controllers
 {
@@ -51,6 +52,19 @@ namespace Wedding.Wishlist.WebApp.Controllers
             var responseContent = await httpResponse.Content.ReadAsStringAsync();
 
             return StatusCode((int)httpResponse.StatusCode, responseContent);
+        }
+
+        [HttpGet("Wishlist/{wishlistId}")]
+        public async Task<IActionResult> GetWishlistsAsync(string wishlistId)
+        {
+            var httpResponse = await _httpClient.GetFromJsonAsync<GetWishlistResponse>($"/api/Wishlist/{wishlistId}");
+
+            if (httpResponse == null)
+            {
+                return NotFound();
+            }
+            
+            return Ok(httpResponse.Data.Wishlist.FirstOrDefault());
         }
     }
 }
